@@ -72,3 +72,108 @@ namespace BookThicknessCalculator.Pages
 To run this program, create a new ASP.NET Razor Pages project in Visual Studio or your preferred C# development environment. Replace the contents of the respective files (`Book.cs`, `Index.cshtml.cs`, and `Index.cshtml`) with the provided code. Build and run the project, and you will be able to access the book thickness calculator through the generated web page.
 
 On the web page, you can enter the book's title, author, and number of pages. Upon clicking the "Calculate" button, the form will be submitted to the server, and the `OnPost` method in the `IndexModel` class will calculate the book's thickness by multiplying the number of pages by 0.1mm (the thickness of each page). The result will be displayed on the page along with the book's information if the thickness is greater than 0.
+
+
+Certainly! Here's an example of a C# program using ASP.NET Razor Pages that allows you to enter a class, including students, and calculates the total cost of buying uniforms for all students:
+
+**Student.cs**
+```csharp
+public class Student
+{
+    public string Name { get; set; }
+    public string Gender { get; set; }
+}
+```
+
+**Index.cshtml.cs**
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+
+namespace UniformCostCalculator.Pages
+{
+    public class IndexModel : PageModel
+    {
+        [BindProperty]
+        public string ClassName { get; set; }
+
+        [BindProperty]
+        public int NumStudents { get; set; }
+
+        public List<Student> Students { get; set; } = new List<Student>();
+
+        public void OnPost()
+        {
+            double femaleUniformCost = 100000;  // Cost of a female uniform set
+            double maleUniformCost = 120000;  // Cost of a male uniform set
+            double totalCost = 0;
+
+            foreach (var student in Students)
+            {
+                if (student.Gender == "female")
+                {
+                    totalCost += femaleUniformCost;
+                }
+                else if (student.Gender == "male")
+                {
+                    totalCost += maleUniformCost;
+                }
+            }
+
+            ViewData["TotalCost"] = totalCost;
+        }
+    }
+}
+```
+
+**Index.cshtml**
+```html
+@page
+@model UniformCostCalculator.Pages.IndexModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uniform Cost Calculator</title>
+</head>
+<body>
+    <h1>Uniform Cost Calculator</h1>
+
+    <form method="post">
+        <label>Class Name:</label>
+        <input asp-for="ClassName" /><br />
+
+        <label>Number of Students:</label>
+        <input asp-for="NumStudents" /><br />
+
+        <h2>Students:</h2>
+        @for (int i = 0; i < Model.NumStudents; i++)
+        {
+            <h3>Student @i</h3>
+            <label>Name:</label>
+            <input name="Students[@i].Name" /><br />
+
+            <label>Gender:</label>
+            <select name="Students[@i].Gender">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select><br />
+        }
+
+        <input type="submit" value="Calculate" />
+    </form>
+
+    @if (ViewData["TotalCost"] != null)
+    {
+        <h2>Class Information:</h2>
+        <p><strong>Class Name:</strong> @Model.ClassName</p>
+        <p><strong>Number of Students:</strong> @Model.NumStudents</p>
+        <p><strong>Total Uniform Cost:</strong> @ViewData["TotalCost"]</p>
+    }
+</body>
+</html>
+```
+
+To run this program, create a new ASP.NET Razor Pages project in Visual Studio or your preferred C# development environment. Replace the contents of the respective files (`Student.cs`, `Index.cshtml.cs`, and `Index.cshtml`) with the provided code. Build and run the project, and you will be able to access the uniform cost calculator through the generated web page.
+
+On the web page, you can enter the class name and the number of students in the class. For each student, you will enter their name and select their gender from a dropdown menu. Upon clicking the "Calculate" button, the form will be submitted to the server, and the `OnPost` method in the `IndexModel
