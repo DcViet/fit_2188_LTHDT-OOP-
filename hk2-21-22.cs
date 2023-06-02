@@ -1,7 +1,7 @@
-Certainly! Here's an example of a C# program using ASP.NET Razor Pages that allows you to enter information about a book and calculates its thickness based on the number of pages:
+Here's an example of a C# program using ASP.NET Razor Pages that allows you to enter information about a book and calculates its thickness based on the number of pages:
 
 **Book.cs**
-```csharp
+```
 public class Book
 {
     public string Title { get; set; }
@@ -12,7 +12,7 @@ public class Book
 ```
 
 **Index.cshtml.cs**
-```csharp
+```
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -74,10 +74,10 @@ To run this program, create a new ASP.NET Razor Pages project in Visual Studio o
 On the web page, you can enter the book's title, author, and number of pages. Upon clicking the "Calculate" button, the form will be submitted to the server, and the `OnPost` method in the `IndexModel` class will calculate the book's thickness by multiplying the number of pages by 0.1mm (the thickness of each page). The result will be displayed on the page along with the book's information if the thickness is greater than 0.
 
 
-Certainly! Here's an example of a C# program using ASP.NET Razor Pages that allows you to enter a class, including students, and calculates the total cost of buying uniforms for all students:
+Here's an example of a C# program using ASP.NET Razor Pages that allows you to enter a class, including students, and calculates the total cost of buying uniforms for all students:
 
 **Student.cs**
-```csharp
+```
 public class Student
 {
     public string Name { get; set; }
@@ -86,7 +86,7 @@ public class Student
 ```
 
 **Index.cshtml.cs**
-```csharp
+```
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
